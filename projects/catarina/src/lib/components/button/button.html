@@ -1,0 +1,20 @@
+<button [class]="buttonClasses" [disabled]="disabled" [type]="type" (click)="handleClick($event)">
+
+    @if (iconLeft) {
+    <cat-icon [name]="iconLeft" [size]="iconSize" class="icon-left">
+    </cat-icon>
+    }
+
+    <span class="button-content">
+        @if (iconCenter) {
+        <cat-icon [name]="iconCenter" [size]="iconSize" class="icon-left">
+        </cat-icon>
+        }
+        <ng-content></ng-content>
+    </span>
+
+    @if (iconRight) {
+    <cat-icon [name]="iconRight" [size]="iconSize" class="icon-right">
+    </cat-icon>
+    }
+</button>

@@ -1,0 +1,149 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+    padding: 20px;
+    border-radius: 16px;
+    min-height: 500px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.grid-container>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+
+    width: 100%;
+    height: 100%;
+    background-color: var(--element-color-3);
+    box-sizing: border-box;
+    padding: 8px;
+}
+
+.item-1 {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 3;
+}
+
+.item-2 {
+    grid-column: 3 / span 2;
+    grid-row: 1 / span 2;
+}
+
+.item-3 {
+    grid-column: 5 / span 1;
+    grid-row: 1 / span 5;
+}
+
+.item-4 {
+    grid-column: 3 / span 2;
+    grid-row: 3 / span 1;
+}
+
+.item-5 {
+    grid-column: 1 / span 2;
+    grid-row: 4 / span 2;
+}
+
+.item-6 {
+    grid-column: 3 / span 2;
+    grid-row: 4 / span 2;
+}
+
+
+/* Typographies */
+.typographies {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 1em;
+}
+
+/* Colors */
+.colors {
+    display: flex;
+    flex-direction: column;
+    gap: .7em;
+    max-width: 100%;
+}
+
+.colors>div {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    background-color: var(--element-color-4);
+    border-radius: 8px;
+    padding: 8px;
+    width: auto;
+    flex-wrap: wrap;
+}
+
+.colors>h4 {
+    margin-left: 3em;
+}
+
+.colors>div>div {
+    aspect-ratio: 1/1;
+    height: 3em;
+    border-radius: 50%;
+    border: 1px dashed;
+}
+
+.row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+/* Cards */
+/*
+card tiene atributos sincronizados a hostBinging
+a ellos se acceder mediante el parametro del hostBinging 
+Por ejemplo data-card-variant
+
+Esto permite acceder a las custom class de la siguiente manera:
+*/
+cat-card[data-card-class="cards"] {
+    /* Propiedades que afectan al host */
+    width: 100%;
+    height: 100%;
+
+    /* 2. Usar ::ng-deep PARA ATRAVESAR y apuntar al section */
+    ::ng-deep {
+        >section {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            gap: 3%;
+            background-color: var(--neutral-color-1);
+            padding: 8px;
+            border-radius: 18px;
+            flex-wrap: wrap;
+        }
+
+        /* También puedes apuntar por clases específicas 
+        >section.elevated.lg {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }*/
+    }
+}
+
+/* 3. O usando Custom Properties si las expones 
+cat-card {
+  ::ng-deep section {
+    /* Usar las custom properties si están disponibles 
+    background-color: var(--card-custom-bg, inherit);
+    
+    /* Referenciar la variant como propiedad personalizada 
+    &[data-variant="elevated"] {
+      box-shadow: var(--elevation-level, 0 2px 4px rgba(0,0,0,0.1));
+    }
+  }
+}*/

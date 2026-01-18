@@ -1,0 +1,99 @@
+<div class="grid-container">
+    <div class="item-1">
+        <p>Tipografias</p>
+        <div class="typographies">
+            <h1>Title H1</h1>
+            <h2>Title H2</h2>
+            <h3>Title H3</h3>
+            <h4>Title H4</h4>
+            <h5>Title H5</h5>
+            <h6>Title H6</h6>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+        </div>
+    </div>
+    <div class="item-2">
+        <cat-button style="position: fixed; top: 0; left: 0;" variant="contrast" (clicked)="handleTheme()" iconCenter="sun"></cat-button>
+        <p>Colores</p>
+        <div class="colors">
+            <h4>Primary</h4>
+            <div>
+                <div *ngFor="let v of [0,0,0,0,0], index as i" [style]="`background-color: var(--primary-color-${i});`">
+                </div>
+            </div>
+            <h4>Gray Scale</h4>
+            <div>
+                <div *ngFor="let v of [0,0,0,0,0,0,0,0,0,0], index as i"
+                    [style]="`background-color: var(--neutral-color-${i});`"></div>
+            </div>
+            <h4>Elements</h4>
+            <div>
+                <div *ngFor="let v of [0,0,0,0,0], index as i" [style]="`background-color: var(--element-color-${i});`">
+                </div>
+            </div>
+
+            <br><br>
+        </div>
+    </div>
+    <div class="item-3">Indice</div>
+    <div class="item-4">
+        <p>Cards</p>
+        <cat-card variant="elevated" size="lg" customClass="cards">
+            <cat-card variant="surface">Surface</cat-card>
+            <cat-card variant="elevated">Elevated</cat-card>
+            <cat-card variant="outlined">Outlined</cat-card>
+        </cat-card>
+    </div>
+    <div class="item-5">
+        <p>Botones</p>
+        <div>
+            <section>
+                <h2>Buttons</h2>
+
+                <h3>Variants</h3>
+                <div class="row">
+                    <cat-button variant="primary">Primary</cat-button>
+                    <cat-button variant="secondary">Secondary</cat-button>
+                    <cat-button variant="contrast">Contrast</cat-button>
+                    <cat-button variant="outline">Outline</cat-button>
+                    <cat-button variant="ghost">Ghost</cat-button>
+                </div>
+
+                <h3>Sizes</h3>
+                <div class="row">
+                    <cat-button size="sm">Small</cat-button>
+                    <cat-button size="md">Medium</cat-button>
+                    <cat-button size="lg">Large</cat-button>
+                </div>
+
+                <h3>With Icons</h3>
+                <div class="row">
+                    <cat-button iconLeft="home">Home</cat-button>
+                    <cat-button iconRight="home">Next</cat-button>
+                    <cat-button iconLeft="home" iconRight="home">Both</cat-button>
+                </div>
+
+                <h3>States</h3>
+                <div class="row">
+                    <cat-button>Normal</cat-button>
+                    <cat-button [disabled]="true">Disabled</cat-button>
+                </div>
+
+                <h3>Click Events</h3>
+                <div class="row">
+                    <cat-button (clicked)="counterEvent()">Click me</cat-button>
+                    <p>Clicks: {{ clickCount }}</p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="item-6">
+        <p>Inputs</p>
+        <cat-card customClass="cards">
+            <cat-text-input placeholder="Username"></cat-text-input>
+        </cat-card>
+    </div>
+</div>
