@@ -1,0 +1,68 @@
+.accordion {
+    margin: 0;
+    padding: 0;
+    min-width: 5em;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
+.accordion-panel-active {
+    box-sizing: border-box;
+    padding: .5em;
+    min-height: 5em;
+    background-color: var(--neutral-color-0);
+    width: 100%;
+    transition: 250ms;
+    border-radius: 18px;
+}
+
+.accordion-panel-unactive {
+    display: none;
+    transition: 150ms;
+}
+
+cat-button[data-button-class="accordion-button"] {
+    width: 100%;
+    display: block;
+
+    ::ng-deep button {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.scrolleable {
+    height: 7em;
+    overflow-y: auto;
+}
+
+.scrolleable::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.scrolleable::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrolleable::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.scrolleable::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.surface {
+    background-color: var(--element-color-4);
+}
+
+.elevated {
+    background-color: var(--neutral-color-0);
+}
+
+.outlined {
+    background-color: var(--element-color-3);
+    border: 1px solid var(--neutral-color-6);
+}

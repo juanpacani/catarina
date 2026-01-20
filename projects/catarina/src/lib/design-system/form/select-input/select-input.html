@@ -1,0 +1,10 @@
+<div>
+    <input catInput [value]="value" [type]="type" readonly id="select" (mousedown)="active =! active" [placeholder]="placeholder">
+    <section role="listbox" class="options" [ngClass]="active ? 'options-active' : 'options.unactive'" [style.transform]="transform">
+        @if (active) {
+            <div role="option"*ngFor="let option of options" (mousedown)="choseValue(option)">
+                {{ option }}
+            </div>
+        }
+    </section>
+</div>

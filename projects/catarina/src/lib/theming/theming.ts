@@ -41,7 +41,7 @@ export class Theming {
 
     //Apply theme
     this.applyTheme(allPalettes);
-
+    
     return this.allPalettesSubject.value;
   }
 
@@ -69,6 +69,7 @@ export class Theming {
     // Apply theme to CSS variables
     this.applyTheme(allPalettes);
     
+    console.log(this.allPalettesSubject.value);
     return {
       neutral: neutralColors,
       elements: elementsColors

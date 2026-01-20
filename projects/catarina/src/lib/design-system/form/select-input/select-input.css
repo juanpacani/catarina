@@ -1,0 +1,74 @@
+div {
+    position: relative;
+    display: inline-block;
+}
+
+.options-active {
+    background-color: var(--neutral-color-0);
+    z-index: 1;
+    border-radius: 18px;
+    padding: 8px;
+    box-sizing: border-box;
+
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+
+    transition: 250ms;
+}
+
+.options-unactive {
+    display: none;
+    transition: 150ms;
+}
+
+.options>div {
+    background-color: transparent;
+    min-height: 1em;
+    padding-top: 0.5em;
+    padding-left: .5em;
+    padding-right: .8em;
+    color: var(--neutral-color-9);
+    box-sizing: border-box;
+}
+
+.options>div:hover {
+    background-color: var(--neutral-color-1);
+}
+
+.scrolleable {
+    height: 7em;
+    overflow-y: auto;
+}
+
+.scrolleable::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.scrolleable::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scrolleable::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.scrolleable::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.surface {
+    background-color: var(--element-color-4);
+}
+
+.elevated {
+    background-color: var(--neutral-color-0);
+}
+
+.outlined {
+    background-color: var(--element-color-3);
+    border: 1px solid var(--neutral-color-6);
+}

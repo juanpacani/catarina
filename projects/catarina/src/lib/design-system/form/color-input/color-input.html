@@ -1,0 +1,29 @@
+<style>
+    div {
+        position: relative;
+        aspect-ratio: 1/1;
+    }
+
+    div:hover {
+        cursor: grab;
+    }
+    input {
+        width: 100%;
+        aspect-ratio: 1/1;
+        top: 0;
+        left: 0;
+    }
+    cat-icon {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+    }
+</style>
+<!-- input-color.html -->
+<div [style]="`width: ${size};`">
+    <input type="color" [style]="icon ? 'opacity: 0;' : 'opacity: 100%;'" [value]="value" (input)="onInput($event)" (blur)="onTouched()">
+    @if (icon) {
+        <cat-icon [style]="`height: ${size};`" size="100%" name="palette"></cat-icon>    
+    }
+</div>

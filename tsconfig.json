@@ -11,6 +11,17 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
+    "paths": {
+      "catarina": [
+        "./projects/catarina/src/public-api.ts"
+      ],
+      "safirial": [
+        "./projects/safirial/src/public-api.ts"
+      ],
+      "safirial-icons": [
+        "./projects/safirial-icons/src/public-api.ts"
+      ]
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve"
@@ -22,5 +33,31 @@
     "typeCheckHostBindings": true,
     "strictTemplates": true
   },
-  "files": []
+  "files": [],
+  "references": [
+    {
+      "path": "./projects/safirial/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/safirial/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/safirial-icons/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/safirial-icons/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/playground/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/playground/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/catarina/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/catarina/tsconfig.spec.json"
+    }
+  ]
 }

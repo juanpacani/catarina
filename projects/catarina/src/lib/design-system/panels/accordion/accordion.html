@@ -1,0 +1,13 @@
+<section class="accordion" [style]="`width: ${width};`">
+    <div>
+        <cat-button [iconLeft]="iconLeft ? (status ? 'minus' : 'plus') : undefined"
+            [iconCenter]="iconCenter ? (status ? 'minus' : 'plus') : undefined"
+            [iconRight]="iconRight && status ? 'minus' : 'plus'" (clicked)="updateAccordionGroupStatus()"
+            [variant]="buttonVariant" [size]="buttonSize" customClass="accordion-button" [disabled]="disabled">
+            {{label}}
+        </cat-button>
+    </div>
+    <div [class]="panelClasses" [ngClass]="status ? 'accordion-panel-active': 'accordion-panel-unactive'">
+        <ng-content *ngIf="status"></ng-content>
+    </div>
+</section>
