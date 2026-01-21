@@ -1,59 +1,154 @@
-# LibraryWorkspace
+## Library Workspace – Monorepo Angular para librerías UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.1.
+Este workspace Angular agrupa varias librerías enfocadas en UI y en manejo de iconos:
 
-## Development server
+- **`catarina`**: Design system de componentes UI para Angular 20.
+- **`safirial`**: Conjunto de componentes UI ligeros basados en iconos.
+- **`safirial-icons`**: Paquete de iconos SVG y utilidades para resolver rutas de iconos.
+- **`playground`**: Aplicación Angular de ejemplo que consume las librerías anteriores.
 
-To start a local development server, run:
+Todas las librerías están pensadas para proyectos Angular 20.3.x y declaran como _peerDependencies_:
 
-```bash
-ng serve
-```
+- **`@angular/core`**: `^20.3.0`
+- **`@angular/common`**: `^20.3.0`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Instalación desde npm
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Una vez publicadas, las librerías pueden instalarse de forma independiente en un proyecto Angular:
 
 ```bash
-ng generate --help
+npm install catarina
+npm install safirial
+npm install safirial-icons
 ```
 
-## Building
-
-To build the project run:
+O en una sola línea:
 
 ```bash
-ng build
+npm install catarina safirial safirial-icons
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+También es posible usar `pnpm` o `yarn` con los mismos nombres de paquete.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Uso básico en una aplicación Angular
+
+En un proyecto Angular 20, después de instalar las dependencias, se pueden configurar los proveedores de iconos usando las utilidades exportadas por `safirial-icons`:
+
+```ts
+// app.config.ts
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { ICON_PROVIDER as SAFIRIAL_ICON_PROVIDER } from 'safirial';
+import { ICON_PROVIDER as CATARINA_ICON_PROVIDER } from 'catarina';
+import { getIconPath } from 'safirial-icons';
+
+const iconProviderConfig = {
+  getPath: getIconPath
+};
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(),
+    { provide: SAFIRIAL_ICON_PROVIDER, useValue: iconProviderConfig },
+    { provide: CATARINA_ICON_PROVIDER, useValue: iconProviderConfig }
+  ]
+};
+```
+
+Con esta configuración, los componentes de `catarina` y `safirial` que dependen de `ICON_PROVIDER` resuelven las rutas de iconos usando el paquete `safirial-icons`.
+
+---
+
+## Consumo de los componentes
+
+Una vez configurados los proveedores, se pueden importar los componentes directamente desde cada librería:
+
+```ts
+// Ejemplo de componente de aplicación
+import { Component } from '@angular/core';
+import { Button as CatarinaButton, Icon as CatarinaIcon } from 'catarina';
+import { Button as SafirialButton, Icon as SafirialIcon } from 'safirial';
+
+@Component({
+  selector: 'app-root',
+  imports: [CatarinaButton, CatarinaIcon, SafirialButton, SafirialIcon],
+  template: `
+    <cat-button variant="primary" iconLeft="home">
+      Botón Catarina
+    </cat-button>
+
+    <saf-button variant="secondary" iconLeft="sun">
+      Botón Safirial
+    </saf-button>
+  `
+})
+export class AppComponent {}
+```
+
+Los nombres de icono (`"home"`, `"sun"`, etc.) deben corresponder a las entradas exportadas en la lista `iconList` del paquete `safirial-icons`.
+
+---
+
+## Desarrollo local del workspace
+
+Dentro del workspace, se pueden ejecutar los comandos estándar de Angular CLI:
+
+- **Servir la aplicación de prueba (`playground`)**:
+
+  ```bash
+  npm run start
+  # o
+  ng serve
+  ```
+
+- **Construir todas las librerías configuradas**:
+
+  ```bash
+  npm run build
+  # o
+  ng build
+  ```
+
+Los artefactos de compilación se generan en el directorio `dist/` con una carpeta por librería (por ejemplo, `dist/catarina`, `dist/safirial`, `dist/safirial-icons`).
+
+---
+
+## Publicación de las librerías
+
+Cada librería del workspace puede publicarse por separado en el registro de npm. Un flujo general para publicar una librería es:
 
 ```bash
-ng test
+ng build <nombre-libreria>
+cd dist/<nombre-libreria>
+npm publish
 ```
 
-## Running end-to-end tests
+Los nombres de librería válidos en este workspace son:
 
-For end-to-end (e2e) testing, run:
+- `catarina`
+- `safirial`
+- `safirial-icons`
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Idioma / Language
 
-## Additional Resources
+Esta documentación está disponible en español. Para la versión en inglés, consulta [README.en.md](./README.en.md).
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This documentation is available in Spanish. For the English version, see [README.en.md](./README.en.md).
+
+---
+
+## Nota sobre la documentación
+
+Esta documentación fue generada usando **Cursor** con los siguientes parámetros:
+
+- **Herramienta**: Cursor IDE
+- **Modelo**: Auto (agente router de Cursor)
+- **Idioma**: Español
+- **Instrucciones**: Analizar todos los proyectos del workspace y actualizar la documentación para consumo, sin incluir errores, mejoras ni sugerencias, solo información factual sobre instalación, configuración y uso de las librerías.

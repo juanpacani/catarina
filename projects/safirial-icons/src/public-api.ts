@@ -1,6 +1,6 @@
 export const ICON_BASE_PATH = 'safirial-icons';
 
-export const iconList = ['home', 'sun'] as const;
+export const iconList = ['home', 'sun', 'chevron-arrow-down', 'chevron-arrow-up', 'chevron-arrow-left', 'chevron-arrow-right', 'email', 'github', 'linkedin', 'minus', 'moon', 'palette', 'plus'] as const;
 
 export type IconName = typeof iconList[number];
 
