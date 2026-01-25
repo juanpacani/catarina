@@ -43,3 +43,6 @@ Thumbs.db
 
 # Projects
 projects/safirial/
+
+# Cursor context
+/cursor-context

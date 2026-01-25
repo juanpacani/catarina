@@ -34,6 +34,6 @@ export class Card {
   }
 */
   get cardClasses(): string {
-    return `${this.variant} ${this.size} ${this.customClass}`;
+    return `cat-card ${this.variant} ${this.size} ${this.customClass}`;
   }
 }

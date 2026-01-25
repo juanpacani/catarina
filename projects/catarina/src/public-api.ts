@@ -30,6 +30,8 @@ image, search, telefono, reset, radio button, checkbox, button, email
 //Overlays
 //Pending
 export * from './lib/design-system/overlays/dialog/dialog';
+export * from './lib/design-system/overlays/drawer/drawer';
+export * from './lib/design-system/overlays/menu/menu';
 
 
 /*Services and Directives */

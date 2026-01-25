@@ -2,12 +2,19 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Button, Icon } from 'safirial';
 import { Button as CButton, Icon as CIcon, Theming, 
 // Panels
-Card as CCard, Accordion as CAccordion, AccordionGroup as CAccordionGroup, 
+Card as CCard, 
+Accordion as CAccordion, 
+AccordionGroup as CAccordionGroup, 
 // Inputs
+CatInput as CCatInput,
 ColorInput as CColorInput, 
 SelectInput as CSelectInput,
 //Overlays
-Dialog as CDialog, CatInput as CCatInput} from 'catarina';
+Dialog as CDialog, 
+Drawer as CDrawer,
+Menu as CMenu,
+
+} from 'catarina';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 //import { getIconPath } from 'safirial-icons';
@@ -35,6 +42,8 @@ import { FormsModule } from '@angular/forms';
 
     //Overlays
     CDialog,
+    CDrawer,
+    CMenu
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
@@ -44,7 +53,7 @@ export class App implements OnInit {
 
   clickCount = 0;
 
-  color: string = '#A40000';
+  color: string = '#16709c';
   isDark: boolean = false;
 
 
@@ -52,6 +61,9 @@ export class App implements OnInit {
   surfacedDialogActive: boolean = false;
   elevatedDialogActive: boolean = false;
   outlinedDialogActive: boolean = false;
+
+  //Drawer
+  drawerActive: boolean = false;
 
   //Accordion
   accordionStatus: boolean = false;
@@ -117,6 +129,14 @@ export class App implements OnInit {
       default:
         break;
     }
+  }
+
+  // Drawer Events
+  openDrawer() {
+    this.drawerActive = true;
+  }
+  closeDrawer() {
+    this.drawerActive = false;
   }
 
   //Accordion Events

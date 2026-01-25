@@ -4,6 +4,7 @@
     grid-template-rows: repeat(7, 1fr);
     gap: 8px;
     padding: 20px;
+    margin-top: 7em;
     border-radius: 16px;
     min-height: 500px;
     box-sizing: border-box;
@@ -108,14 +109,16 @@
 
 
 /* Button */
-cat-button[data-button-class="theme-button"] {
+/* cat-button[data-button-class="theme-button"] {
     ::ng-deep {
         >button {
             border-radius: 0%;
             border-bottom-right-radius: 18px;
         }
     }
-}
+} */
+
+
 /* Cards */
 /*
 card tiene atributos sincronizados a hostBinging

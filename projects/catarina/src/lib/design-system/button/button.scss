@@ -25,17 +25,16 @@ button {
     }
 
     .primary:hover:not(:disabled) {
-        background-color: #8a0000;
         background-color: var(--primary-color-1);
     }
 
     .secondary {
-        background-color: var(--neutral-color-3);
-        color: white;
+        background-color: var(--neutral-color-0);
+        color: var(--neutral-color-9);
     }
 
     .secondary:hover:not(:disabled) {
-        background-color: var(--neutral-color-4);
+        background-color: var(--neutral-color-1);
     }
 
     .contrast {
@@ -49,22 +48,22 @@ button {
 
     .outline {
         background-color: transparent;
-        color: #A40000;
-        border: 2px solid #A40000;
+        color: var(--primary-color-0);
+        border: 2px solid var(--primary-color-1);
     }
 
     .outline:hover:not(:disabled) {
-        background-color: #A40000;
+        background-color: var(--primary-color-0);
         color: white;
     }
 
     .ghost {
         background-color: transparent;
-        color: #A40000;
+        color: var(--primary-color-0);
     }
 
     .ghost:hover:not(:disabled) {
-        background-color: rgba(164, 0, 0, 0.1);
+        background-color: color-mix(in srgb, var(--primary-color-0) 10%, transparent);
     }
 
     /* Sizes */

@@ -32,7 +32,7 @@ export class Icon implements OnDestroy {
   svgContent = signal<SafeHtml>('');
   isLoading = signal<boolean>(false);
 
-  @Input() size = '24px';
+  @Input() size: string = '1em';
   @Input() color = 'currentColor';
 
   ngOnDestroy() {

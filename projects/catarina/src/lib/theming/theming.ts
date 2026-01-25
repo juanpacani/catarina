@@ -22,16 +22,11 @@ export class Theming {
   generatePalettes(color: string, dark: boolean): string[][] {
     this.activeThemeSubject.next(dark);
 
-    //Step 1: Calculate the Color
-    const colors = this.hexToRgb(color);
+    const primaryColors = this.calculatePrimaryColor(color);
 
-    //Step 2: Get the Primary Palette (static, doesn't change with theme)
-    const primaryColors: string[] = this.palette(colors, false, 4); // Always use light theme
-
-    //Step 3: Calculate dynamic palettes (neutral and elements)
     const dynamicPalettes = this.calculateDynamicPalettes(dark);
 
-    //Step 4: Assign All Palettes to Local Variables
+    //Assign All Palettes to Local Variables
     let allPalettes: string[][] = [primaryColors];
 
     allPalettes = allPalettes.concat([dynamicPalettes.neutral]);
@@ -41,8 +36,28 @@ export class Theming {
 
     //Apply theme
     this.applyTheme(allPalettes);
-    
+
     return this.allPalettesSubject.value;
+  }
+
+  public calculatePrimaryColor(color: string) {
+    //Step 1: Calculate the Color
+    const colors = this.hexToRgb(color);
+
+    //Step 2: Get the Primary Palette (static, doesn't change with theme)
+    const primaryColors: string[] = this.palette(colors, false, 4); // Always use light theme
+
+    const allPalettes = [
+      primaryColors, // Keep primary (static)
+      this.allPalettesSubject.value[1],
+      this.allPalettesSubject.value[2]
+    ];
+
+    this.allPalettesSubject.next(allPalettes);
+
+    this.applyTheme(allPalettes);
+    
+    return primaryColors;
   }
 
   public calculateDynamicPalettes(dark: boolean): { neutral: string[], elements: string[] } {
@@ -70,7 +85,7 @@ export class Theming {
 
     // Apply theme to CSS variables
     this.applyTheme(allPalettes);
-    
+
     return {
       neutral: neutralColors,
       elements: elementsColors

@@ -1,3 +1,27 @@
+<cat-menu style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1;">
+    <cat-button variant="secondary" iconLeft="home">Home</cat-button>
+    <cat-button variant="secondary">Catarina</cat-button>
+    <cat-button variant="secondary">Safirial</cat-button>
+    <cat-button variant="secondary">Icons</cat-button>
+    <cat-accordion label="Scrolleable" buttonVariant="primary" width="12em" [scrolleable]="true"
+        [status]="accordionStatus">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+            et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip
+            ex
+            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+            eu
+            fugiat
+            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+            mollit
+            anim id est laborum.</p>
+    </cat-accordion>
+    <cat-select-input [(ngModel)]="value" (ngModelChange)="onValue($event)" [options]="options"
+        placeholder="Select Input" transform="translateY(0%) translateX(-5%)"></cat-select-input>
+    <cat-button style="margin-left: auto;" variant="contrast" (clicked)="handleTheme()"
+        [iconCenter]="isDark ? 'sun' : 'moon'"></cat-button>
+</cat-menu>
 <div class="grid-container">
     <div class="item-1">
         <p>Tipografias</p>
@@ -18,8 +42,6 @@
         </div>
     </div>
     <div class="item-2">
-        <cat-button customClass="theme-button" style="position: fixed; top: 0; left: 0;" variant="contrast"
-            (clicked)="handleTheme()" [iconLeft]="isDark ? 'sun' : 'moon'"></cat-button>
         <p>Colores</p>
         <div class="colors">
             <h4>Primary</h4>
@@ -103,7 +125,8 @@
                 <input catInput placeholder="Number Input" type="number">
             </div>
             <div class="input-inside-card">
-                <cat-select-input [(ngModel)]="value" (ngModelChange)="onValue($event)" [options]="options" placeholder="Select Input" transform="translateY(0%) translateX(0%)"></cat-select-input>
+                <cat-select-input [(ngModel)]="value" (ngModelChange)="onValue($event)" [options]="options"
+                    placeholder="Select Input" transform="translateY(0%) translateX(0%)"></cat-select-input>
             </div>
             <div class="input-inside-card">
                 <cat-color-input [icon]="true"></cat-color-input>
@@ -126,12 +149,22 @@
             <cat-button (clicked)="openDialog(2)">Outlined Dialog</cat-button>
             <cat-dialog variant="outlined" *ngIf="outlinedDialogActive"
                 (closs)="closeDialog($event, 2)">Dialog</cat-dialog>
+
+            <cat-button (clicked)="openDrawer()" variant="secondary" iconCenter="bars-3"></cat-button>
+            <cat-drawer *ngIf="drawerActive" side="top" (closs)="closeDrawer()"></cat-drawer>
+
+            <cat-menu>
+                <cat-button variant="secondary" iconCenter="bars-3">Laila</cat-button>
+                <cat-button variant="secondary" iconCenter="bars-3">Catrine</cat-button>
+                <cat-button variant="secondary" iconCenter="bars-3">Lois</cat-button>
+            </cat-menu>
         </cat-card>
     </div>
     <div class="item-8">
         <p>Panels</p>
         <cat-card width="100%">
-            <cat-accordion label="Scrolleable" buttonVariant="primary" width="12em" [scrolleable]="true" [status]="accordionStatus">
+            <cat-accordion label="Scrolleable" buttonVariant="primary" width="12em" [scrolleable]="true"
+                [status]="accordionStatus">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et
                     dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -144,7 +177,8 @@
                     mollit
                     anim id est laborum.</p>
             </cat-accordion>
-            <cat-accordion label="Non Scrolleable" buttonVariant="primary" width="12em" [scrolleable]="false" [status]="accordionStatus">
+            <cat-accordion label="Non Scrolleable" buttonVariant="primary" width="12em" [scrolleable]="false"
+                [status]="accordionStatus">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et
                     dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -162,39 +196,48 @@
         <p>Accordion Group</p>
         <cat-card width="100%">
             <cat-accordion-group [singleExpand]="true">
-                <cat-accordion label="Surface/Secondary" accordionId="1" buttonVariant="secondary" variant="surface" width="12em" [scrolleable]="true"
-                    [status]="accordionStatus">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                <cat-accordion label="Surface/Secondary" accordionId="1" buttonVariant="secondary" variant="surface"
+                    width="12em" [scrolleable]="true" [status]="accordionStatus">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
                         et
                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                         aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                        dolore
                         eu fugiat
-                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt
                         mollit
                         anim id est laborum.</p>
                 </cat-accordion>
-                <cat-accordion label="Elevated/Contrast" accordionId="2" buttonVariant="contrast" variant="elevated" width="12em" [scrolleable]="true"
-                    [status]="accordionStatus">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                <cat-accordion label="Elevated/Contrast" accordionId="2" buttonVariant="contrast" variant="elevated"
+                    width="12em" [scrolleable]="true" [status]="accordionStatus">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
                         et
                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                         aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                        dolore
                         eu fugiat
-                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt
                         mollit
                         anim id est laborum.</p>
                 </cat-accordion>
-                <cat-accordion label="Outlined/Outlined" accordionId="3" buttonVariant="outline" variant="outlined" width="12em" [scrolleable]="true"
-                    [status]="accordionStatus">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                <cat-accordion label="Outlined/Outlined" accordionId="3" buttonVariant="outline" variant="outlined"
+                    width="12em" [scrolleable]="true" [status]="accordionStatus">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
                         et
                         dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                         aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                        dolore
                         eu fugiat
-                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                        deserunt
                         mollit
                         anim id est laborum.</p>
                 </cat-accordion>
@@ -202,3 +245,5 @@
         </cat-card>
     </div>
 </div>
+
+<!-- https://gridforge-builder.netlify.app/es -->

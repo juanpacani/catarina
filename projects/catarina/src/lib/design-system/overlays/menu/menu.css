@@ -1,0 +1,143 @@
+.menu-wrapper {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu {
+    height: auto;
+    background-color: rgb(var(--element-color-4) / 0.7);
+    backdrop-filter: blur(10px);
+    margin: .75rem .75rem;
+    padding: 1.75rem 2.5rem;
+    border-radius: 52px;
+    border: 1px var(--neutral-color-7) solid;
+
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu-content {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    flex: 1;
+    flex-wrap: wrap;
+    overflow: hidden;
+    min-width: 0;
+}
+
+.more-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 18px;
+    background-color: var(--neutral-color-9);
+    color: var(--neutral-color-0);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.more-button:hover {
+    background-color: var(--neutral-color-8);
+}
+
+.more-button svg {
+    transition: transform 0.2s;
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% - 0.75rem);
+    right: 0.75rem;
+    background-color: rgb(var(--element-color-4) / 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    border: 1px var(--neutral-color-7) solid;
+    padding: 1rem;
+    min-width: 200px;
+    max-width: 300px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    animation: dropdownSlide 0.2s ease-out;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dropdown-content ::ng-deep cat-button,
+.dropdown-content ::ng-deep button {
+    width: 100%;
+    justify-content: flex-start;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+    :host {
+        max-width: 100vw;
+    }
+
+    .menu-wrapper {
+        max-width: 100vw;
+    }
+
+    .menu {
+        padding: 1rem 1.5rem;
+        margin: 0.5rem;
+        max-width: calc(100vw - 1rem);
+        width: calc(100% - 1rem);
+    }
+
+    .dropdown {
+        right: 0.5rem;
+        left: 0.5rem;
+        max-width: none;
+    }
+}
+
+:host {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Desktop y Tablet: usar 100% (no incluye scrollbar) */
+@media (min-width: 641px) {
+    :host {
+        max-width: 100%;
+    }
+
+    .menu-wrapper {
+        max-width: 100%;
+    }
+
+    .menu {
+        max-width: calc(100% - 1.5rem);
+    }
+}

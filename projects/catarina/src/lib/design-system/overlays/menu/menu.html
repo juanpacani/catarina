@@ -1,0 +1,30 @@
+<div class="menu-wrapper">
+  <div class="menu" #menuContainer>
+    <div class="menu-content" #menuContent>
+      <ng-content></ng-content>
+    </div>
+
+    @if (showMoreButton()) {
+    <button class="more-button" (click)="toggleDropdown()" [attr.aria-expanded]="isDropdownOpen()" type="button">
+      <span>More</span>
+      @if(isDropdownOpen()){
+        <cat-icon size="16px" name="chevron-arrow-up"></cat-icon>
+      } @else {
+        <cat-icon size="16px" name="chevron-arrow-down"></cat-icon>
+      }
+<!--       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
+        [style.transform]="isDropdownOpen() ? 'rotate(180deg)' : 'rotate(0deg)'">
+        <path d="M4 6l4 4 4-4z" />
+      </svg> -->
+    </button>
+    }
+  </div>
+
+  @if (showMoreButton() && isDropdownOpen()) {
+  <div class="dropdown" #dropdown>
+    <div class="dropdown-content">
+      <!-- Aquí se moverán los elementos overflow -->
+    </div>
+  </div>
+  }
+</div>
