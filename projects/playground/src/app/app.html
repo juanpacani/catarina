@@ -3,24 +3,13 @@
     <cat-button variant="secondary">Catarina</cat-button>
     <cat-button variant="secondary">Safirial</cat-button>
     <cat-button variant="secondary">Icons</cat-button>
-    <cat-accordion label="Scrolleable" buttonVariant="primary" width="12em" [scrolleable]="true"
-        [status]="accordionStatus">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip
-            ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-            eu
-            fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit
-            anim id est laborum.</p>
-    </cat-accordion>
-    <cat-select-input [(ngModel)]="value" (ngModelChange)="onValue($event)" [options]="options"
-        placeholder="Select Input" transform="translateY(0%) translateX(-5%)"></cat-select-input>
-    <cat-button style="margin-left: auto;" variant="contrast" (clicked)="handleTheme()"
-        [iconCenter]="isDark ? 'sun' : 'moon'"></cat-button>
+    <div class="theme-buttons">
+        <cat-color-input [icon]="true"></cat-color-input>
+        <cat-select-input [(ngModel)]="value" (ngModelChange)="onValue($event)" [options]="options"
+            placeholder="Select Input" transform="translateY(0%) translateX(-5%)"></cat-select-input>
+        <cat-button style="margin-left: auto;" variant="contrast" (clicked)="handleTheme()"
+            [iconCenter]="isDark ? 'sun' : 'moon'"></cat-button>
+    </div>
 </cat-menu>
 <div class="grid-container">
     <div class="item-1">
@@ -247,3 +236,7 @@
 </div>
 
 <!-- https://gridforge-builder.netlify.app/es -->
+
+@for (icon of iconList; track $index) {
+    <cat-icon [name]="icon" size="3em"></cat-icon>
+}

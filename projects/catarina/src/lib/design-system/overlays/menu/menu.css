@@ -1,3 +1,10 @@
+.theme-buttons {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 1em;
+}
+
 .menu-wrapper {
     position: relative;
     width: 100%;

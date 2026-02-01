@@ -8,9 +8,9 @@
     <button class="more-button" (click)="toggleDropdown()" [attr.aria-expanded]="isDropdownOpen()" type="button">
       <span>More</span>
       @if(isDropdownOpen()){
-        <cat-icon size="16px" name="chevron-arrow-up"></cat-icon>
+        <cat-icon size="16px" name="chevron-up"></cat-icon>
       } @else {
-        <cat-icon size="16px" name="chevron-arrow-down"></cat-icon>
+        <cat-icon size="16px" name="chevron-down"></cat-icon>
       }
 <!--       <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"
         [style.transform]="isDropdownOpen() ? 'rotate(180deg)' : 'rotate(0deg)'">

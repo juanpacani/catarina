@@ -17,6 +17,7 @@ Menu as CMenu,
 } from 'catarina';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { iconList } from 'safirial-icons';
 //import { getIconPath } from 'safirial-icons';
 
 @Component({
@@ -43,13 +44,15 @@ import { FormsModule } from '@angular/forms';
     //Overlays
     CDialog,
     CDrawer,
-    CMenu
+    CMenu,
+    CIcon,
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
   protected readonly title = signal('playground');
+  iconList = iconList;
 
   clickCount = 0;
 
