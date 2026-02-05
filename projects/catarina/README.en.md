@@ -53,22 +53,23 @@ The `public-api.ts` file exposes the main elements of the design system:
   - Theming utilities
 - **Tokens**:
   - `ICON_PROVIDER`
+- **Icon utilities**:
+  - `getIconPath`, `iconList`, `IconName`, `ICON_BASE_PATH`
 
 All these symbols are imported directly from the `catarina` package.
 
 ---
 
-## Icon configuration with `safirial-icons`
+## Icon configuration
 
 `catarina` uses the `ICON_PROVIDER` token to resolve icon paths.  
-This token can be configured using utilities from the `safirial-icons` package:
+This token can be configured using the integrated utilities in `catarina`:
 
 ```ts
 // app.config.ts
 import { ApplicationConfig } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
-import { ICON_PROVIDER as CATARINA_ICON_PROVIDER } from 'catarina';
-import { getIconPath } from 'safirial-icons';
+import { ICON_PROVIDER as CATARINA_ICON_PROVIDER, getIconPath } from 'catarina';
 
 const iconProviderConfig = {
   getPath: getIconPath
@@ -82,11 +83,11 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-With this configuration, `catarina` components that use icons resolve paths from `safirial-icons`.
+With this configuration, `catarina` components that use icons resolve paths using the integrated utilities.
 
 ### Assets configuration in `angular.json`
 
-In addition to configuring `ICON_PROVIDER`, you need to add the following entry in the `assets` section of `angular.json` so that `safirial-icons` SVG files are copied to the output directory:
+To use external SVG icons, you need to add the following entry in the `assets` section of `angular.json` so that SVG files are copied to the output directory:
 
 ```json
 {
@@ -112,7 +113,7 @@ In addition to configuring `ICON_PROVIDER`, you need to add the following entry 
 }
 ```
 
-This configuration copies all SVG files from `node_modules/safirial-icons/assets` to the `safirial-icons` folder in the application's output directory.
+**Note**: If you use the `safirial-icons` package from npm, this configuration copies SVG files from `node_modules/safirial-icons/assets` to the `safirial-icons` folder in the output directory. The utilities `getIconPath` and `iconList` are available directly from `catarina` without needing to install `safirial-icons`.
 
 ---
 
@@ -139,7 +140,11 @@ import { Button as CatarinaButton, Icon as CatarinaIcon } from 'catarina';
 export class AppComponent {}
 ```
 
-Icon `name` values must match the names defined in the `iconList` from the `safirial-icons` package.
+Icon `name` values must match the names defined in the `iconList` exported from `catarina`. You can import `iconList` for autocomplete and validation:
+
+```ts
+import { iconList, IconName } from 'catarina';
+```
 
 ---
 

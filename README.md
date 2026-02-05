@@ -1,13 +1,11 @@
 ## Library Workspace – Monorepo Angular para librerías UI
 
-Este workspace Angular agrupa varias librerías enfocadas en UI y en manejo de iconos:
+Este workspace Angular agrupa librerías enfocadas en UI y manejo de iconos:
 
-- **`catarina`**: Design system de componentes UI para Angular 20.
-- **`safirial`**: Conjunto de componentes UI ligeros basados en iconos.
-- **`safirial-icons`**: Paquete de iconos SVG y utilidades para resolver rutas de iconos.
-- **`playground`**: Aplicación Angular de ejemplo que consume las librerías anteriores.
+- **`catarina`**: Design system de componentes UI para Angular 20 con utilidades de iconos integradas.
+- **`playground`**: Aplicación Angular de ejemplo que consume la librería.
 
-Todas las librerías están pensadas para proyectos Angular 20.3.x y declaran como _peerDependencies_:
+La librería está pensada para proyectos Angular 20.3.x y declara como _peerDependencies_:
 
 - **`@angular/core`**: `^20.3.0`
 - **`@angular/common`**: `^20.3.0`
@@ -16,35 +14,25 @@ Todas las librerías están pensadas para proyectos Angular 20.3.x y declaran co
 
 ## Instalación desde npm
 
-Una vez publicadas, las librerías pueden instalarse de forma independiente en un proyecto Angular:
+Una vez publicada, la librería puede instalarse en un proyecto Angular:
 
 ```bash
 npm install catarina
-npm install safirial
-npm install safirial-icons
 ```
 
-O en una sola línea:
-
-```bash
-npm install catarina safirial safirial-icons
-```
-
-También es posible usar `pnpm` o `yarn` con los mismos nombres de paquete.
+También es posible usar `pnpm` o `yarn` con el mismo nombre de paquete.
 
 ---
 
 ## Uso básico en una aplicación Angular
 
-En un proyecto Angular 20, después de instalar las dependencias, se pueden configurar los proveedores de iconos usando las utilidades exportadas por `safirial-icons`:
+En un proyecto Angular 20, después de instalar la dependencia, se puede configurar el proveedor de iconos usando las utilidades exportadas por `catarina`:
 
 ```ts
 // app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
-import { ICON_PROVIDER as SAFIRIAL_ICON_PROVIDER } from 'safirial';
-import { ICON_PROVIDER as CATARINA_ICON_PROVIDER } from 'catarina';
-import { getIconPath } from 'safirial-icons';
+import { ICON_PROVIDER as CATARINA_ICON_PROVIDER, getIconPath } from 'catarina';
 
 const iconProviderConfig = {
   getPath: getIconPath
@@ -54,43 +42,42 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideHttpClient(),
-    { provide: SAFIRIAL_ICON_PROVIDER, useValue: iconProviderConfig },
     { provide: CATARINA_ICON_PROVIDER, useValue: iconProviderConfig }
   ]
 };
 ```
 
-Con esta configuración, los componentes de `catarina` y `safirial` que dependen de `ICON_PROVIDER` resuelven las rutas de iconos usando el paquete `safirial-icons`.
+Con esta configuración, los componentes de `catarina` que dependen de `ICON_PROVIDER` resuelven las rutas de iconos usando las utilidades integradas en `catarina`.
 
 ---
 
 ## Consumo de los componentes
 
-Una vez configurados los proveedores, se pueden importar los componentes directamente desde cada librería:
+Una vez configurado el proveedor, se pueden importar los componentes directamente desde `catarina`:
 
 ```ts
 // Ejemplo de componente de aplicación
 import { Component } from '@angular/core';
-import { Button as CatarinaButton, Icon as CatarinaIcon } from 'catarina';
-import { Button as SafirialButton, Icon as SafirialIcon } from 'safirial';
+import { Button, Icon, iconList } from 'catarina';
 
 @Component({
   selector: 'app-root',
-  imports: [CatarinaButton, CatarinaIcon, SafirialButton, SafirialIcon],
+  imports: [Button, Icon],
   template: `
     <cat-button variant="primary" iconLeft="home">
       Botón Catarina
     </cat-button>
 
-    <saf-button variant="secondary" iconLeft="sun">
-      Botón Safirial
-    </saf-button>
+    <cat-icon name="sun" size="32px"></cat-icon>
   `
 })
-export class AppComponent {}
+export class AppComponent {
+  // iconList está disponible para autocompletado y validación
+  availableIcons = iconList;
+}
 ```
 
-Los nombres de icono (`"home"`, `"sun"`, etc.) deben corresponder a las entradas exportadas en la lista `iconList` del paquete `safirial-icons`.
+Los nombres de icono (`"home"`, `"sun"`, etc.) deben corresponder a las entradas exportadas en la lista `iconList` de `catarina`.
 
 ---
 
@@ -114,7 +101,7 @@ Dentro del workspace, se pueden ejecutar los comandos estándar de Angular CLI:
   ng build
   ```
 
-Los artefactos de compilación se generan en el directorio `dist/` con una carpeta por librería (por ejemplo, `dist/catarina`, `dist/safirial`, `dist/safirial-icons`).
+Los artefactos de compilación se generan en el directorio `dist/` con una carpeta por librería (por ejemplo, `dist/catarina`).
 
 ---
 
@@ -128,11 +115,9 @@ cd dist/<nombre-libreria>
 npm publish
 ```
 
-Los nombres de librería válidos en este workspace son:
+El nombre de librería válido en este workspace es:
 
 - `catarina`
-- `safirial`
-- `safirial-icons`
 
 ---
 

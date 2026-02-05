@@ -4,7 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build catarina",
+    "pack-dist": "cd dist/catarina && npm pack",
+    "build-and-pack": "npm run build && npm run pack-dist",
+    "build:pack": "ng build catarina && cd dist/catarina && npm pack",
+    "publish": "cd dist/catarina && npm publish && cd .. && rm -rf catarina || echo 'Publish failed'",
+
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

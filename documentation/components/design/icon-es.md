@@ -1,6 +1,6 @@
 # Icon (`cat-icon`)
 
-El componente `Icon` carga y muestra iconos SVG de forma dinámica, con soporte para SSR y validación de contenido.
+El componente `Icon` carga y muestra iconos SVG de forma dinámica, con soporte para SSR y validación de contenido. Los iconos solo se renderizan cuando se cargan correctamente, optimizando el rendimiento.
 
 ### Importación
 
@@ -36,10 +36,11 @@ export class ExampleComponent {}
 ### Características
 
 - **Carga dinámica**: Los iconos se cargan mediante `fetch` cuando se proporciona un `name` o `src`
-- **Validación**: Valida que el contenido sea un SVG válido antes de renderizarlo
+- **Validación estricta**: Valida que el contenido sea un SVG válido antes de renderizarlo
 - **SSR compatible**: Funciona correctamente en Server-Side Rendering
-- **Placeholder**: Muestra un icono placeholder si el icono no se encuentra o falla al cargar
+- **Renderizado condicional**: Solo muestra el icono cuando se carga correctamente (no muestra placeholder)
 - **Procesamiento automático**: Procesa los SVG para usar `currentColor` y asegurar escalado correcto
+- **Cancelación de peticiones**: Cancela automáticamente peticiones anteriores cuando cambia el icono
 
 ### Ejemplos
 
@@ -79,9 +80,82 @@ El componente procesa automáticamente los SVG cargados:
 
 Si un icono no se puede cargar:
 
-1. Se muestra un icono placeholder
+1. El componente no renderiza nada (optimización de rendimiento)
 2. Se registra un error en la consola del navegador
 3. El componente continúa funcionando sin romper la aplicación
+
+### Configuración con paquetes de iconos externos
+
+Para sincronizar el componente con paquetes de iconos externos (como `safirial-icons`), necesitas configurar dos cosas:
+
+#### 1. Configuración de assets en `angular.json`
+
+Agrega la siguiente entrada en la sección `assets` de tu proyecto para que los archivos SVG se copien al directorio de salida:
+
+```json
+{
+  "projects": {
+    "tu-proyecto": {
+      "architect": {
+        "build": {
+          "options": {
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/safirial-icons/assets",
+                "output": "safirial-icons"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Esta configuración copia todos los archivos SVG desde `node_modules/safirial-icons/assets` a la carpeta `safirial-icons` en el directorio de salida de la aplicación.
+
+#### 2. Configuración del proveedor en `app.config.ts`
+
+Configura el `ICON_PROVIDER` usando las utilidades integradas en `catarina`:
+
+```typescript
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { ICON_PROVIDER as CATARINA_ICON_PROVIDER, getIconPath } from 'catarina';
+
+const iconProviderConfig = {
+  getPath: getIconPath
+};
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(),
+    { provide: CATARINA_ICON_PROVIDER, useValue: iconProviderConfig }
+  ]
+};
+```
+
+Con esta configuración, puedes usar cualquier icono de la lista exportada en `iconList` desde `catarina`:
+
+```typescript
+import { iconList, IconName } from 'catarina';
+
+// iconList contiene todos los nombres de iconos disponibles
+// IconName es el tipo TypeScript para autocompletado
+```
+
+### Uso con iconos personalizados
+
+Si prefieres usar iconos personalizados sin un paquete externo, puedes usar la propiedad `src`:
+
+```typescript
+<cat-icon src="/assets/icons/mi-icono.svg" size="24px"></cat-icon>
+```
 
 ### Notas
 
@@ -89,28 +163,5 @@ Si un icono no se puede cargar:
 - Si usas `src`, proporciona una ruta absoluta o relativa al archivo SVG
 - Los iconos se validan estrictamente para asegurar que sean SVG válidos
 - El tamaño máximo de un archivo SVG es 100KB (se muestra una advertencia si es mayor)
-- En SSR, se muestra un placeholder hasta que el icono se carga en el cliente
-
-### Integración con safirial-icons
-
-Para usar iconos de `safirial-icons`, configura el `ICON_PROVIDER`:
-
-```typescript
-// app.config.ts
-import { ICON_PROVIDER } from 'catarina';
-import { getIconPath } from 'safirial-icons';
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    { provide: ICON_PROVIDER, useValue: { getPath: getIconPath } }
-  ]
-};
-```
-
-Luego puedes usar cualquier icono de la lista de `safirial-icons`:
-
-```typescript
-<cat-icon name="home"></cat-icon>
-<cat-icon name="sun"></cat-icon>
-<cat-icon name="moon"></cat-icon>
-```
+- En SSR, el componente no renderiza nada hasta que se carga en el cliente
+- El componente cancela automáticamente peticiones de carga cuando cambia el `name` o `src`

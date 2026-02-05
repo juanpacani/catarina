@@ -30,10 +30,7 @@ export class ExampleComponent {}
 
 ### Propiedades (Inputs)
 
-| Propiedad | Tipo | Valor por defecto | Descripción |
-|-----------|------|-------------------|-------------|
-| `variant` | `'surface' \| 'elevated' \| 'outlined'` | `'surface'` | Estilo visual del menú |
-| `customClass` | `string` | `''` | Clase CSS personalizada |
+Actualmente el componente `Menu` no expone propiedades de entrada. El componente funciona como contenedor para sus hijos y gestiona automáticamente el overflow.
 
 ### Características
 
@@ -67,7 +64,7 @@ export class ExampleComponent {}
 #### Menú con muchos elementos (overflow)
 
 ```typescript
-<cat-menu variant="elevated">
+<cat-menu>
   <cat-button variant="secondary">Item 1</cat-button>
   <cat-button variant="secondary">Item 2</cat-button>
   <cat-button variant="secondary">Item 3</cat-button>
@@ -75,15 +72,6 @@ export class ExampleComponent {}
   <cat-button variant="secondary">Item 5</cat-button>
   <cat-button variant="secondary">Item 6</cat-button>
   <!-- Los que no caben irán al dropdown "More" -->
-</cat-menu>
-```
-
-#### Menú con clase personalizada
-
-```typescript
-<cat-menu customClass="my-menu" variant="outlined">
-  <cat-button variant="ghost">Opción 1</cat-button>
-  <cat-button variant="ghost">Opción 2</cat-button>
 </cat-menu>
 ```
 
