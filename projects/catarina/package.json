@@ -1,6 +1,6 @@
 {
   "name": "catarina",
-  "version": "20.3.1",
+  "version": "20.3.5",
   "description": "Angular 20.3.0 UI Design System, preview: https://jpcn-portfolio.vercel.app/catarina-preview",
   "keywords": ["angular", "design-system", "ui", "components", "hydenaky"],
   "author": "Juan Pablo Cañon N. (Hydenaky)",
@@ -15,7 +15,8 @@
   "homepage": "https://github.com/Hydenaky/library-workspace/blob/main/README.md",
   "peerDependencies": {
     "@angular/common": "^20.3.0",
-    "@angular/core": "^20.3.0"
+    "@angular/core": "^20.3.0",
+    "@angular/cdk": "^20.2.14"
   },
   "dependencies": {
     "tslib": "^2.3.0"

@@ -7,7 +7,7 @@ export interface IconProvider {
 export const ICON_PROVIDER = new InjectionToken<IconProvider>('ICON_PROVIDER', {
   providedIn: 'root',
   factory: () => ({
-    // Fallback por defecto si no se configura
+    // Proporciona un fallback por defecto si no se configura
     getPath: (name: string) => `icons/${name}.svg`
   })
 });

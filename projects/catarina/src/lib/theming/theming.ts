@@ -26,7 +26,7 @@ export class Theming {
 
     const dynamicPalettes = this.calculateDynamicPalettes(dark);
 
-    //Assign All Palettes to Local Variables
+    // Asigna todas las paletas a variables locales
     let allPalettes: string[][] = [primaryColors];
 
     allPalettes = allPalettes.concat([dynamicPalettes.neutral]);
@@ -34,17 +34,17 @@ export class Theming {
 
     this.allPalettesSubject.next(allPalettes);
 
-    //Apply theme
+    // Aplica el tema
     this.applyTheme(allPalettes);
 
     return this.allPalettesSubject.value;
   }
 
   public calculatePrimaryColor(color: string) {
-    //Step 1: Calculate the Color
+    // Paso 1: Calcula el color
     const colors = this.hexToRgb(color);
 
-    //Step 2: Get the Primary Palette (static, doesn't change with theme)
+    // Paso 2: Obtiene la paleta primaria (estática, no cambia con el tema)
     const primaryColors: string[] = this.palette(colors, false, 4); // Always use light theme
 
     const allPalettes = [
@@ -66,15 +66,15 @@ export class Theming {
     this.activeThemeSubject.next(dark);
 
 
-    // Calculate neutral colors (changes with theme)
+    // Calcula los colores neutrales (cambian con el tema)
     const neutralColors: string[] = contrastTheme
       ? this.palette({ red: 255, green: 255, blue: 255 }, false, 9)
       : this.palette({ red: 0, green: 0, blue: 0 }, true, 9);
 
-    // Calculate element colors (changes with theme)
+    // Calcula los colores de elementos (cambian con el tema)
     const elementsColors: string[] = this.elementsColors(theme, 3, 40);
 
-    // Update palettes array with dynamic values
+    // Actualiza el array de paletas con valores dinámicos
     const allPalettes = [
       this.allPalettesSubject.value[0], // Keep primary (static)
       neutralColors,
@@ -83,7 +83,7 @@ export class Theming {
 
     this.allPalettesSubject.next(allPalettes);
 
-    // Apply theme to CSS variables
+    // Aplica el tema a las variables CSS
     this.applyTheme(allPalettes);
 
     return {

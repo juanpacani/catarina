@@ -24,7 +24,7 @@ export class CatInput implements OnInit {
       return;
     }
 
-    // Inyectar estilos solo una vez
+    // Inyecta los estilos solo una vez
     if (!CatInput.stylesInjected && isPlatformBrowser(this.platformId)) {
       this.injectStyles();
       CatInput.stylesInjected = true;

@@ -17,7 +17,7 @@ export class Drag implements AfterViewInit {
   ngAfterViewInit() {
     const el = this.el.nativeElement as HTMLElement;
 
-    // Si el elemento no tiene position seteado, le ponemos absolute
+    // Si el elemento no tiene position seteado, establece absolute
     if (typeof window !== 'undefined') {
       const computedStyle = window.getComputedStyle(el);
       if (computedStyle.position === 'static') {

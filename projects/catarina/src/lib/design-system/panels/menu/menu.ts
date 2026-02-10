@@ -73,7 +73,7 @@ export class Menu implements AfterViewInit, OnDestroy {
   };
 
   private checkOverflow() {
-    // Si el dropdown está abierto, no recalcula
+    // Si el dropdown está abierto, no recalcula el overflow
     if (this.isDropdownOpen()) {
       const overflowItems = this.overflowItems();
       if (overflowItems.length > 0) {
@@ -88,7 +88,7 @@ export class Menu implements AfterViewInit, OnDestroy {
 
     const container = this.menuContent.nativeElement;
 
-    // Restaurar todos los elementos que puedan estar en el dropdown
+    // Restaura todos los elementos que puedan estar en el dropdown
     this.restoreOverflowItems();
 
     const items = Array.from(container.children) as HTMLElement[];
@@ -109,22 +109,22 @@ export class Menu implements AfterViewInit, OnDestroy {
       return;
     }
 
-    // Restaurar todos los elementos a su estado visible antes de calcular
+    // Restaura todos los elementos a su estado visible antes de calcular
     menuItems.forEach(item => {
       item.style.display = '';
     });
 
-    // Forzar un reflow para obtener posiciones correctas
+    // Fuerza un reflow para obtener posiciones correctas
     container.offsetHeight;
 
-    // Detectar elementos en la primera fila vs elementos en filas adicionales
+    // Detecta elementos en la primera fila vs elementos en filas adicionales
     const firstItemTop = menuItems[0]?.getBoundingClientRect().top;
     const firstRowItems: HTMLElement[] = [];
     const overflowItems: HTMLElement[] = [];
 
     menuItems.forEach(item => {
       const itemTop = item.getBoundingClientRect().top;
-      // Tolerancia de 1px para manejar diferencias de redondeo
+      // Usa tolerancia de 1px para manejar diferencias de redondeo
       if (Math.abs(itemTop - firstItemTop) <= 1) {
         firstRowItems.push(item);
       } else {
@@ -132,16 +132,16 @@ export class Menu implements AfterViewInit, OnDestroy {
       }
     });
 
-    // Si hay elementos en overflow, mostrar el botón More y ocultar los elementos overflow
+    // Si hay elementos en overflow, muestra el botón More y oculta los elementos overflow
     const needsMoreButton = overflowItems.length > 0;
     this.showMoreButton.set(needsMoreButton);
 
-    // Ocultar elementos que están en la segunda fila o más
+    // Oculta elementos que están en la segunda fila o más
     overflowItems.forEach(item => {
       item.style.display = 'none';
     });
 
-    // Mantener visibles solo los elementos de la primera fila
+    // Mantiene visibles solo los elementos de la primera fila
     firstRowItems.forEach(item => {
       item.style.display = '';
     });
@@ -169,7 +169,7 @@ export class Menu implements AfterViewInit, OnDestroy {
       return;
     }
 
-    // Limpia contenido previo del dropdown (Por si hay algun elemento)
+    // Limpia el contenido previo del dropdown (por si hay algún elemento)
     this.restoreOverflowItems();
 
     const overflowItems = this.overflowItems();
@@ -181,27 +181,27 @@ export class Menu implements AfterViewInit, OnDestroy {
     //const menuContent = this.menuContent.nativeElement; //No se usa porque los elementos ya están en el dropdown
 
     overflowItems.forEach(item => {
-      // Mover el elemento real al dropdown
-      // El elemento ya está oculto (display: none), así que se hace visible y se mueve al dropdown
+      // Mueve el elemento real al dropdown
+      // El elemento ya está oculto (display: none), así que lo hace visible y lo mueve al dropdown
       item.style.display = '';
       item.style.visibility = 'visible';
 
-      // Mover el elemento al dropdown
+      // Mueve el elemento al dropdown
       dropdownContent.appendChild(item);
     });
   }
 
-  //Esta funcion sirve para mover los elementos del dropdown al menu-content
-  // NO los elimina del signal overflowItems, ni del DOM, (Por lo que genera sobrecarga de memoria)
+  // Esta función sirve para mover los elementos del dropdown al menu-content
+  // NO los elimina del signal overflowItems, ni del DOM, (por lo que genera sobrecarga de memoria)
   private restoreOverflowItems() {
     const overflowItems = this.overflowItems();
     const menuContent = this.menuContent.nativeElement;
 
     overflowItems.forEach(item => {
-      // Si el elemento está en el dropdown, moverlo de vuelta al menu-content
+      // Si el elemento está en el dropdown, lo mueve de vuelta al menu-content
       const dropdownContent = item.closest('.dropdown-content');
       if (dropdownContent && item.parentElement === dropdownContent) {
-        // Ocultar el elemento y moverlo de vuelta al menu-content
+        // Oculta el elemento y lo mueve de vuelta al menu-content
         item.style.display = 'none';
         menuContent.appendChild(item);
       }
@@ -212,14 +212,14 @@ export class Menu implements AfterViewInit, OnDestroy {
     const newState = !this.isDropdownOpen();
 
     if (!newState) {
-      // Si se está cerrando, restaurar los elementos a su posición original
+      // Si se está cerrando, restaura los elementos a su posición original
       this.restoreOverflowItems();
     }
 
     this.isDropdownOpen.set(newState);
 
     if (newState) {
-      // Recalcular overflow antes de abrir el dropdown
+      // Recalcula el overflow antes de abrir el dropdown
       setTimeout(() => {
         this.checkOverflow();
         // Esperar a que el dropdown esté en el DOM antes de actualizar

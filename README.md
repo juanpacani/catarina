@@ -128,12 +128,3 @@ Esta documentación está disponible en español. Para la versión en inglés, c
 This documentation is available in Spanish. For the English version, see [README.en.md](./README.en.md).
 
 ---
-
-## Nota sobre la documentación
-
-Esta documentación fue generada usando **Cursor** con los siguientes parámetros:
-
-- **Herramienta**: Cursor IDE
-- **Modelo**: Auto (agente router de Cursor)
-- **Idioma**: Español
-- **Instrucciones**: Analizar todos los proyectos del workspace y actualizar la documentación para consumo, sin incluir errores, mejoras ni sugerencias, solo información factual sobre instalación, configuración y uso de las librerías.

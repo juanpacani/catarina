@@ -1,6 +1,7 @@
-<section [class]="drawerClasses">
-    <cat-button iconCenter="x-mark" variant="contrast" class="close-button" (clicked)="clossOverlay()"></cat-button>
-    <ng-content></ng-content>
-</section>
-<div class="dialog-shadow" (click)="clossOverlay()">
-</div>
+<!-- Template que se renderiza dentro del overlay del CDK -->
+<ng-template #drawerTemplate>
+    <section [class]="drawerClasses">
+      <cat-button iconCenter="x-mark" variant="contrast" class="close-button" (clicked)="closeDrawer()"></cat-button>
+      <ng-content></ng-content>
+    </section>
+  </ng-template>

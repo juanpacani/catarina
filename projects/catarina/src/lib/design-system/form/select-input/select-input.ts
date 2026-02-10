@@ -38,7 +38,7 @@ export class SelectInput implements ControlValueAccessor {
 
   //@Output() selected = new EventEmitter<string>();
 
-  //Accesibility
+  // Accesibilidad
   @HostListener('document:click', ['$event'])
   outerClick(event: Event) {
     if (!this.el.nativeElement.contains(event.target)) {
@@ -57,7 +57,7 @@ export class SelectInput implements ControlValueAccessor {
   onChange = (value: any) => { };
   onTouched = () => { };
 
-  //Here starts the events from ControlValueAccesor
+  // Aquí comienzan los eventos de ControlValueAccessor
   writeValue(value: any): void {
     this.value = value;
   };
@@ -67,7 +67,7 @@ export class SelectInput implements ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
-  //Here ends The events from ControlValueAccesor
+  // Aquí terminan los eventos de ControlValueAccessor
 
   choseValue(option: any) {
     this.value = option;

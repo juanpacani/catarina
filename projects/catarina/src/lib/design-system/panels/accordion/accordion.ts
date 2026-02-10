@@ -16,14 +16,14 @@ export class Accordion {
   @Input() disabled = false;
   @Input() customClass = '';
 
-  //Button Properties
+  // Propiedades del botón
   @Input() buttonVariant: 'primary' | 'secondary' | 'contrast' | 'outline' | 'ghost' = 'secondary';
   @Input() buttonSize: 'sm' | 'md' | 'lg' = 'md';
   @Input() iconLeft: boolean = false;
   @Input() iconCenter: boolean = false;
   @Input() iconRight: boolean = true;
 
-  //Panel Properties
+  // Propiedades del panel
   @Input() scrolleable: boolean = false;
   @Input() variant: 'surface' | 'outlined' | 'elevated' = 'surface';
 
@@ -33,7 +33,7 @@ export class Accordion {
   buttonWidth: number = 0;
 
   ngAfterViewInit() {
-    // Obtener el ancho del botón después de renderizar
+    // Obtiene el ancho del botón después de renderizar
     setTimeout(() => {
       if (this.buttonRef) {
         const button = this.buttonRef.nativeElement.querySelector('button');
@@ -44,7 +44,7 @@ export class Accordion {
     });
   }
 
-  // Actualizar cuando cambie el label o otros inputs que afecten tamaño
+  // Actualiza cuando cambia el label o otros inputs que afectan el tamaño
   ngOnChanges() {
     if (this.buttonRef) {
       const button = this.buttonRef.nativeElement.querySelector('button');

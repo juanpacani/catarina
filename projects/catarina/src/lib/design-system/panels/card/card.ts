@@ -11,7 +11,7 @@ export class Card {
   @Input() width: string = 'auto';
   @Input() customClass = '';
 
-  // Exponer las clases como atributos de datos
+  // Expone las clases como atributos de datos
   @HostBinding('attr.data-card-variant') get dataVariant() {
     return this.variant;
   }

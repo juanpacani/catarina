@@ -24,7 +24,7 @@ export class ColorInput implements ControlValueAccessor {
   onInput(event: Event) {
     const newValue = (event.target as HTMLInputElement).value;
     this.value = newValue;
-    this.onChange(newValue); // informa al padre    
+    this.onChange(newValue); // Informa al componente padre del cambio de valor
   }
 
   // Métodos requeridos por ControlValueAccessor

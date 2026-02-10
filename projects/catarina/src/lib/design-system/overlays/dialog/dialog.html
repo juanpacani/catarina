@@ -1,5 +1,6 @@
-<div class="dialog-shadow" (click)="clossOverlay()">
-</div>
-<section CDrag [class]="dialogClasses">
+<!-- Template que se renderiza dentro del overlay del CDK -->
+<ng-template #dialogTemplate>
+  <section CDrag [class]="dialogClasses">
     <ng-content></ng-content>
-</section>
+  </section>
+</ng-template>

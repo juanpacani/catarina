@@ -1,69 +1,72 @@
-## Catarina – Design System para Angular
+## Catarina – Design System for Angular
 
-**Catarina** es una librería de componentes UI para Angular 20.3.x.  
-Incluye botones, iconos, controles de formulario, paneles y utilidades relacionadas con _theming_ e iconos.
+**Catarina** is a UI component library for Angular 20.3.x.  
+It includes buttons, icons, form controls, panels, and utilities related to _theming_ and icons.
 
-La librería está publicada con el nombre:
+The library is published under the name:
 
-- **Paquete npm**: `catarina`
-- **Versión**: `1.0.1`
+- **npm package**: `catarina`
+- **Version**: `1.0.1`
 
 ---
 
-## Requisitos
+## Requirements
 
-`catarina` declara las siguientes _peerDependencies_:
+`catarina` declares the following _peerDependencies_:
 
 - `@angular/core`: `^20.3.0`
 - `@angular/common`: `^20.3.0`
+- `@angular/cdk`: `^20.2.0` (required for Dialog and Drawer components)
 
-Y depende de:
+And depends on:
 
 - `tslib`: `^2.3.0`
 
 ---
 
-## Instalación
+## Installation
 
-En un proyecto Angular 20:
+In an Angular 20 project:
 
 ```bash
-npm install catarina
+npm install catarina @angular/cdk
 ```
 
-También se puede instalar con `pnpm` o `yarn` usando el mismo nombre de paquete.
+It can also be installed with `pnpm` or `yarn` using the same package name.
+
+**Note**: `@angular/cdk` is required if you plan to use the `Dialog` or `Drawer` components. These components use CDK Overlay internally to automatically manage overlays, z-index, and scroll.
 
 ---
 
-## API pública
+## Public API
 
-El archivo `public-api.ts` expone los principales elementos del design system:
+The `public-api.ts` file exposes the main elements of the design system:
 
-- **Componentes de diseño**:
+- **Design components**:
   - `Icon` (`cat-icon`)
   - `Button` (`cat-button`)
-  - Paneles (`card`, `accordion`, `accordion-group`)
-- **Componentes de formulario**:
+  - Panels (`card`, `accordion`, `accordion-group`)
+- **Form components**:
   - `cat-input`, `color-input`, `select-input`, `date-input`, `file-input`,
     `password-input`, `range-input`, `text-area-input`, `time-input`
 - **Overlays**:
   - `dialog`
-- **Servicios y directivas**:
-  - Directiva de arrastre (`drag`)
-  - Utilidades de _theming_
+- **Services and directives**:
+  - Drag directive (`drag`)
+  - Theming utilities
 - **Tokens**:
   - `ICON_PROVIDER`
-- **Utilidades de iconos**:
+- **Icon utilities**:
   - `getIconPath`, `iconList`, `IconName`, `ICON_BASE_PATH`
 
-Todos estos símbolos se importan directamente desde el paquete `catarina`.
+All these symbols are imported directly from the `catarina` package.
 
 ---
 
-## Configuración de iconos
+## Icon configuration
 
-`catarina` utiliza el token `ICON_PROVIDER` para resolver las rutas de los iconos.  
-Este token se puede configurar usando las utilidades integradas en `catarina`:
+`catarina` uses the `ICON_PROVIDER` token to resolve icon paths.  
+This token can be configured using the integrated utilities in `catarina`:
 
 ```ts
 // app.config.ts
@@ -83,16 +86,16 @@ export const appConfig: ApplicationConfig = {
 };
 ```
 
-Con esta configuración, los componentes de `catarina` que usan iconos resuelven las rutas usando las utilidades integradas.
+With this configuration, `catarina` components that use icons resolve paths using the integrated utilities.
 
-### Configuración de assets en `angular.json`
+### Assets configuration in `angular.json`
 
-Para usar iconos SVG externos, es necesario añadir la siguiente entrada en la sección `assets` de `angular.json` para que los archivos SVG se copien al directorio de salida:
+To use external SVG icons, you need to add the following entry in the `assets` section of `angular.json` so that SVG files are copied to the output directory:
 
 ```json
 {
   "projects": {
-    "tu-proyecto": {
+    "your-project": {
       "architect": {
         "build": {
           "options": {
@@ -113,13 +116,13 @@ Para usar iconos SVG externos, es necesario añadir la siguiente entrada en la s
 }
 ```
 
-**Nota**: Si usas el paquete `safirial-icons` desde npm, esta configuración copia los archivos SVG desde `node_modules/safirial-icons/assets` a la carpeta `safirial-icons` en el directorio de salida. Las utilidades `getIconPath` e `iconList` están disponibles directamente desde `catarina` sin necesidad de instalar `safirial-icons`.
+**Note**: If you use the `safirial-icons` package from npm, this configuration copies SVG files from `node_modules/safirial-icons/assets` to the `safirial-icons` folder in the output directory. The utilities `getIconPath` and `iconList` are available directly from `catarina` without needing to install `safirial-icons`.
 
 ---
 
-## Uso básico de componentes
+## Basic component usage
 
-Ejemplo de uso de `cat-button` e `Icon` dentro de un componente de aplicación:
+Example usage of `cat-button` and `Icon` within an application component:
 
 ```ts
 // app.component.ts
@@ -131,7 +134,7 @@ import { Button as CatarinaButton, Icon as CatarinaIcon } from 'catarina';
   imports: [CatarinaButton, CatarinaIcon],
   template: `
     <cat-button variant="primary" size="md" iconLeft="home">
-      Botón Catarina
+      Catarina Button
     </cat-button>
 
     <cat-icon name="sun" [size]="'32px'"></cat-icon>
@@ -140,7 +143,7 @@ import { Button as CatarinaButton, Icon as CatarinaIcon } from 'catarina';
 export class AppComponent {}
 ```
 
-Los valores de `name` de los iconos deben coincidir con los nombres definidos en `iconList` exportado desde `catarina`. Puedes importar `iconList` para autocompletado y validación:
+Icon `name` values must match the names defined in the `iconList` exported from `catarina`. You can import `iconList` for autocomplete and validation:
 
 ```ts
 import { iconList, IconName } from 'catarina';
@@ -148,21 +151,21 @@ import { iconList, IconName } from 'catarina';
 
 ---
 
-## Construcción y publicación
+## Building and publishing
 
-Para compilar la librería desde el workspace:
+To compile the library from the workspace:
 
 ```bash
 ng build catarina
 ```
 
-El resultado se genera en:
+The output is generated in:
 
 ```bash
 dist/catarina
 ```
 
-Para publicar en npm (desde el workspace):
+To publish to npm (from the workspace):
 
 ```bash
 ng build catarina
@@ -172,19 +175,9 @@ npm publish
 
 ---
 
-## Idioma / Language
+## Language / Idioma
 
-Esta documentación está disponible en español. Para la versión en inglés, consulta [README.en.md](./README.en.md).
+This documentation is available in English. For the Spanish version, see [README.en.md](./README.en.md).
 
-This documentation is available in Spanish. For the English version, see [README.en.md](./README.en.md).
+Esta documentación está disponible en inglés. Para la versión en español, consulta [README.en.md](./README.en.md).
 
----
-
-## Nota sobre la documentación
-
-Esta documentación fue generada usando **Cursor** con los siguientes parámetros:
-
-- **Herramienta**: Cursor IDE
-- **Modelo**: Auto (agente router de Cursor)
-- **Idioma**: Español
-- **Instrucciones**: Analizar todos los proyectos del workspace y actualizar la documentación para consumo, sin incluir errores, mejoras ni sugerencias, solo información factual sobre instalación, configuración y uso de las librerías.
